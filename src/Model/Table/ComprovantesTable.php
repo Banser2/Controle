@@ -7,9 +7,11 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Comprovante Model
+ * Comprovantes Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Users
+ * @property \Cake\ORM\Association\BelongsTo $Files
+ * @property \Cake\ORM\Association\BelongsTo $Files
  *
  * @method \App\Model\Entity\Comprovante get($primaryKey, $options = [])
  * @method \App\Model\Entity\Comprovante newEntity($data = null, array $options = [])
@@ -19,7 +21,7 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\Comprovante[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\Comprovante findOrCreate($search, callable $callback = null, $options = [])
  */
-class ComprovanteTable extends Table
+class ComprovantesTable extends Table
 {
 
     /**
@@ -32,12 +34,20 @@ class ComprovanteTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('comprovante');
+        $this->setTable('comprovantes');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
+            'joinType' => 'INNER'
+        ]);
+        $this->belongsTo('Files', [
+            'foreignKey' => 'boleto_id',
+            'joinType' => 'INNER'
+        ]);
+        $this->belongsTo('Files', [
+            'foreignKey' => 'recibo_id',
             'joinType' => 'INNER'
         ]);
     }
@@ -82,6 +92,8 @@ class ComprovanteTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
+        $rules->add($rules->existsIn(['boleto_id'], 'Files'));
+        $rules->add($rules->existsIn(['recibo_id'], 'Files'));
 
         return $rules;
     }

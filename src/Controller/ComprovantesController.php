@@ -4,11 +4,11 @@ namespace App\Controller;
 use App\Controller\AppController;
 
 /**
- * Comprovante Controller
+ * Comprovantes Controller
  *
- * @property \App\Model\Table\ComprovanteTable $Comprovante
+ * @property \App\Model\Table\ComprovantesTable $Comprovantes
  */
-class ComprovanteController extends AppController
+class ComprovantesController extends AppController
 {
 
     /**
@@ -19,12 +19,12 @@ class ComprovanteController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Users']
+            'contain' => ['Users', 'Files']
         ];
-        $comprovante = $this->paginate($this->Comprovante);
+        $comprovantes = $this->paginate($this->Comprovantes);
 
-        $this->set(compact('comprovante'));
-        $this->set('_serialize', ['comprovante']);
+        $this->set(compact('comprovantes'));
+        $this->set('_serialize', ['comprovantes']);
     }
 
     /**
@@ -36,8 +36,8 @@ class ComprovanteController extends AppController
      */
     public function view($id = null)
     {
-        $comprovante = $this->Comprovante->get($id, [
-            'contain' => ['Users']
+        $comprovante = $this->Comprovantes->get($id, [
+            'contain' => ['Users', 'Files']
         ]);
 
         $this->set('comprovante', $comprovante);
@@ -51,18 +51,19 @@ class ComprovanteController extends AppController
      */
     public function add()
     {
-        $comprovante = $this->Comprovante->newEntity();
+        $comprovante = $this->Comprovantes->newEntity();
         if ($this->request->is('post')) {
-            $comprovante = $this->Comprovante->patchEntity($comprovante, $this->request->getData());
-            if ($this->Comprovante->save($comprovante)) {
+            $comprovante = $this->Comprovantes->patchEntity($comprovante, $this->request->getData());
+            if ($this->Comprovantes->save($comprovante)) {
                 $this->Flash->success(__('The comprovante has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The comprovante could not be saved. Please, try again.'));
         }
-        $users = $this->Comprovante->Users->find('list', ['limit' => 200]);
-        $this->set(compact('comprovante', 'users'));
+        $users = $this->Comprovantes->Users->find('list', ['limit' => 200]);
+        $files = $this->Comprovantes->Files->find('list', ['limit' => 200]);
+        $this->set(compact('comprovante', 'users', 'files'));
         $this->set('_serialize', ['comprovante']);
     }
 
@@ -75,20 +76,21 @@ class ComprovanteController extends AppController
      */
     public function edit($id = null)
     {
-        $comprovante = $this->Comprovante->get($id, [
+        $comprovante = $this->Comprovantes->get($id, [
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $comprovante = $this->Comprovante->patchEntity($comprovante, $this->request->getData());
-            if ($this->Comprovante->save($comprovante)) {
+            $comprovante = $this->Comprovantes->patchEntity($comprovante, $this->request->getData());
+            if ($this->Comprovantes->save($comprovante)) {
                 $this->Flash->success(__('The comprovante has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The comprovante could not be saved. Please, try again.'));
         }
-        $users = $this->Comprovante->Users->find('list', ['limit' => 200]);
-        $this->set(compact('comprovante', 'users'));
+        $users = $this->Comprovantes->Users->find('list', ['limit' => 200]);
+        $files = $this->Comprovantes->Files->find('list', ['limit' => 200]);
+        $this->set(compact('comprovante', 'users', 'files'));
         $this->set('_serialize', ['comprovante']);
     }
 
@@ -102,8 +104,8 @@ class ComprovanteController extends AppController
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $comprovante = $this->Comprovante->get($id);
-        if ($this->Comprovante->delete($comprovante)) {
+        $comprovante = $this->Comprovantes->get($id);
+        if ($this->Comprovantes->delete($comprovante)) {
             $this->Flash->success(__('The comprovante has been deleted.'));
         } else {
             $this->Flash->error(__('The comprovante could not be deleted. Please, try again.'));
