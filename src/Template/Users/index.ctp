@@ -3,13 +3,13 @@
   * @var \App\View\AppView $this
   */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
+<nav class="large-2 medium-2 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New User'), ['action' => 'add']) ?></li>
     </ul>
 </nav>
-<div class="users index large-9 medium-8 columns content">
+<div class="users index large-10 medium-11 columns content">
     <h3><?= __('Users') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
@@ -18,7 +18,7 @@
                 <th scope="col"><?= $this->Paginator->sort('nome') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('siape') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('username') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('password') ?></th>
+                <!-- <th scope="col"><?= $this->Paginator->sort('password') ?></th> -->
                 <th scope="col"><?= $this->Paginator->sort('plano') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('role') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('email') ?></th>
@@ -32,7 +32,7 @@
                 <td><?= h($user->nome) ?></td>
                 <td><?= h($user->siape) ?></td>
                 <td><?= h($user->username) ?></td>
-                <td><?= h($user->password) ?></td>
+                <!-- <td><?= h($user->password) ?></td> -->
                 <td><?= h($user->plano) ?></td>
                 <td><?= h($user->role) ?></td>
                 <td><?= h($user->email) ?></td>
