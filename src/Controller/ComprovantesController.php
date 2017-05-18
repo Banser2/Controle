@@ -72,6 +72,7 @@ class ComprovantesController extends AppController
                     $comprovante->recibo_id = $recibo_id->id;
                     $this->Flash->success(__('The comprovante has been saved.'));
                 
+                    return $this->redirect(['action' => 'index']);
 
                 }else{
                     $this->Flash->erro(__('Unable to upload file,p lease try again'));
@@ -79,9 +80,11 @@ class ComprovantesController extends AppController
 
                 }else{
                      
-                $this->Flash->error(__('The comprovante could not be saved. Please, try again.'));
+                    $this->Flash->error(__('The comprovante could not be saved. Please, try again.'));
+
+               }else{
+                    $this->Flash->error(__('Please choose a file to upload.'));
                }
-                    return $this->redirect(['action' => 'index']);
                 }
                 $comprovante = $this->Comprovantes->patchEntity($comprovante, $this->request->getData());
         }
