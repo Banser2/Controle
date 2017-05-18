@@ -22,8 +22,7 @@
                 <th scope="col"><?= $this->Paginator->sort('vencimento') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('pagamento') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('aproved') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('boleto_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>            
                 <th scope="col"><?= $this->Paginator->sort('recibo_id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>

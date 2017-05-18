@@ -14,18 +14,17 @@
     </ul>
 </nav>
 <div class="comprovantes form large-9 medium-8 columns content">
-    <?= $this->Form->create($comprovante) ?>
+    <?= $this->Form->create($comprovante,['type' => 'file']); ?>
     <fieldset>
-        <legend><?= __('Add Comprovante') ?></legend>
+        <legend><?= __('Upload Arquivo') ?></legend>
         <?php
-            echo $this->Form->control('user_id', ['options' => $users]);
-            echo $this->Form->control('boleto_id', ['type' => 'file']);
-            echo $this->Form->control('recibo_id', ['type' => 'file']);
+            // echo $this->Form->control('user_id', ['options' => $users]);           
+            echo $this->Form->control('recibo_id', ['type' => 'file', 'class' => 'form-control']);
             echo $this->Form->control('vencimento');
             echo $this->Form->control('pagamento');
             echo $this->Form->control('aproved');
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button(__('Upload file'),['type'=>'submit', 'class' => 'form-controlbtn btn-default']); ?>
     <?= $this->Form->end() ?>
 </div>

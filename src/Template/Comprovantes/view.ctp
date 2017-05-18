@@ -31,10 +31,7 @@
             <th scope="row"><?= __('Id') ?></th>
             <td><?= $this->Number->format($comprovante->id) ?></td>
         </tr>
-        <tr>
-            <th scope="row"><?= __('Boleto Id') ?></th>
-            <td><?= $this->Number->format($comprovante->boleto_id) ?></td>
-        </tr>
+        
         <tr>
             <th scope="row"><?= __('Vencimento') ?></th>
             <td><?= h($comprovante->vencimento) ?></td>

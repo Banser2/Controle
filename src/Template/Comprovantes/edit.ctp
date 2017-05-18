@@ -27,8 +27,7 @@
             echo $this->Form->control('vencimento');
             echo $this->Form->control('pagamento');
             echo $this->Form->control('aproved');
-            echo $this->Form->control('user_id', ['options' => $users]);
-            echo $this->Form->control('boleto_id');
+            echo $this->Form->control('user_id', ['options' => $users]);        
             echo $this->Form->control('recibo_id', ['options' => $files]);
         ?>
     </fieldset>
