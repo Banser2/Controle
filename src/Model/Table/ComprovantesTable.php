@@ -42,10 +42,7 @@ class ComprovantesTable extends Table
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
-        $this->belongsTo('Files', [
-            'foreignKey' => 'boleto_id',
-            'joinType' => 'INNER'
-        ]);
+       
         $this->belongsTo('Files', [
             'foreignKey' => 'recibo_id',
             'joinType' => 'INNER'

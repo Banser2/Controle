@@ -82,7 +82,7 @@ class ComprovantesController extends AppController
 
                 
                 }
-                // $comprovante->user_id = $this->Auth-user('id');
+                     $comprovante->user_id = $this->Auth-user('id');
                 if ($this->Comprovantes->save($comprovante)){
                     $this->Flash->success(__('The comprovante has been saved.'));
                     return $this->redirect(['action' => 'index']);
