@@ -1,7 +1,6 @@
 <?php
 namespace App\Controller;
 use Cake\Event\Event;
-
 use App\Controller\AppController;
 
 /**
@@ -10,21 +9,18 @@ use App\Controller\AppController;
  * @property \App\Model\Table\UsersTable $Users
  */
 class UsersController extends AppController
-{
+{    
 
-    /**
+public function beforeFilter(Event $event){
+
+    parent::beforeFilter($event);
+    $this->Auth->allow(['add', 'logout']);
+}
+/**
      * Index method
      *
      * @return \Cake\Network\Response|null
      */
-    public function index()
-    {
-        $users = $this->paginate($this->Users);
-
-        $this->set(compact('users'));
-        $this->set('_serialize', ['users']);
-    }
-
     public function login()
     {
         if ($this->request->is('post')) {
@@ -33,14 +29,23 @@ class UsersController extends AppController
                 $this->Auth->setUser($user);
                 return $this->redirect($this->Auth->redirectUrl());
             }
-            $this->Flash->error(__('Invalid username or password, try
-again'));
+            $this->Flash->error(__('Invalid username or password, try again'));
     }
 }
-
     public function logout(){
         return $this->redirect($this->Auth->logout());
     }
+
+    
+    public function index()
+    {
+        $users = $this->paginate($this->Users);
+
+        $this->set(compact('users'));
+        $this->set('_serialize', ['users']);
+    }
+
+
     /**
      * View method
      *
@@ -125,11 +130,5 @@ again'));
         return $this->redirect(['action' => 'index']);
     }
 
-        public function beforeFilter(Event $event)
-        {
-            parent::beforeFilter($event);
-            $this->Auth->allow('add', 'logout');
-    }
-
-
+        
 }

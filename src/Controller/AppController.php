@@ -37,6 +37,15 @@ class AppController extends Controller
      *
      * @return void
      */
+    public function isAuthorized($user)
+    {
+        if (isset($user['role']) && $user['role'] === 'servidor'){
+            return true;
+        }
+        return false;
+    }
+
+
     public function initialize()
     {
         parent::initialize();
@@ -48,7 +57,7 @@ class AppController extends Controller
                 'action' => 'index'
             ],
             'logoutRedirect' => [
-                'controller' => 'Pages',
+                'controller' => 'login',
                 'action' => 'display',
                 'home'
             ]
@@ -79,7 +88,7 @@ class AppController extends Controller
 
     public function beforeFilter(Event $event)
     {
-        $this->Auth->allow(['index', 'view', 'display']);
-    }
+        $this->Auth->allow(['index','view','display']);
+     }
 
 }

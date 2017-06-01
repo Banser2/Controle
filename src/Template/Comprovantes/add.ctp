@@ -18,7 +18,7 @@
     <fieldset>
         <legend><?= __('Upload Arquivo') ?></legend>
         <?php
-            // echo $this->Form->control('user_id', ['options' => $users]);           
+            echo $this->Form->control('user_id', ['options' => $users]);           
             echo $this->Form->control('recibo_id', ['type' => 'file', 'class' => 'form-control']);
             echo $this->Form->control('vencimento');
             echo $this->Form->control('pagamento');
