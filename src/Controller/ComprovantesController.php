@@ -2,6 +2,9 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use App\Controller\Files;
+use Cake\Event\Event;
+use Cake\Mailer\Email;
 
 /**
  * Comprovantes Controller
@@ -82,9 +85,17 @@ class ComprovantesController extends AppController
 
                 
                 }
-                     $comprovante->user_id = $this->Auth-user('id');
+                     $comprovante->user_id = $this->Auth->user('id');
                 if ($this->Comprovantes->save($comprovante)){
                     $this->Flash->success(__('The comprovante has been saved.'));
+
+
+
+
+
+
+
+
                     return $this->redirect(['action' => 'index']);
                 }
 
@@ -92,12 +103,21 @@ class ComprovantesController extends AppController
                              
                 
     }   
-        $users = $this->Comprovantes->Users->find('list', ['limit' => 200]);        
-        $this->set(compact('comprovante', 'users', 'files'));
-        $this->set('_serialize', ['comprovante']);
+                $users = $this->Comprovantes->Users->find('list', ['limit' => 200]);        
+                $this->set(compact('comprovante', 'users'));
+                $this->set('_serialize', ['comprovante']);
+
     
 
 }
+$email = new Email('default');
+            $email->from(['doido.dodeira@gmail.com' => 'teste'])
+            ->emailFormat('html')
+            ->to(strtolower($user->email))
+            ->template('default','meu_template')
+            ->subject('[WEB II] Exemplo de email')
+            ->viewVars(['nome' => $user->nome,'id_usuario' => '$user->id'])
+            ->send();
     /**
      * Edit method
      *
