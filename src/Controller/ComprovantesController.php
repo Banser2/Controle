@@ -91,10 +91,14 @@ class ComprovantesController extends AppController
 
 
 
-
-
-
-
+            $email = new Email('default');
+                        $email->from(['testetext76@gmail.com' => 'teste'])
+                        ->emailFormat('html')
+                        ->to('banser2009@gmail.com')                        
+                        ->template('default','meu_template')
+                        ->subject('[WEB II] Exemplo de email') 
+                        ->viewVars(['nome' => $this->Auth->user('nome'),'id_usuario' => $this->Auth->user('id')])
+                        ->send();
 
                     return $this->redirect(['action' => 'index']);
                 }
@@ -110,14 +114,6 @@ class ComprovantesController extends AppController
     
 
 }
-$email = new Email('default');
-            $email->from(['doido.dodeira@gmail.com' => 'teste'])
-            ->emailFormat('html')
-            ->to(strtolower($user->email))
-            ->template('default','meu_template')
-            ->subject('[WEB II] Exemplo de email')
-            ->viewVars(['nome' => $user->nome,'id_usuario' => '$user->id'])
-            ->send();
     /**
      * Edit method
      *
